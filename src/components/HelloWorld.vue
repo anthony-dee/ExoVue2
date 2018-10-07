@@ -84,12 +84,26 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'HelloWorld',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  created() {
+    axios.get(`https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&select=pl_status,pl_hostname,pl_name,pl_masse,pl_rade,st_dist,pl_orbper,pl_pnum&order=dec&format=json`)
+    .then(response => {
+      // JSON responses are automatically parsed.
+      // this.posts = response.data
+      console.log(response)
+      console.log('asdsads')
+    })
+    .catch(e => {
+      this.errors.push(e)
+    })
   }
 }
 </script>

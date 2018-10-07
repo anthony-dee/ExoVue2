@@ -1,0 +1,85 @@
+// compressedFilenamePattern: ../css/exovue.min.css, expandedFilenamePattern: ../css/exovue.css
+
+@import "variables";
+@import "mixins";
+@import "loader";
+body {
+  @include  fontFamHelVet;
+  width: 100%;
+  margin: 0;
+}
+.hidden{
+  visibility: hidden;
+}
+.container {
+  padding: 20px 10px;
+}
+@include nonMobMQ {
+  .container {
+    margin: 0 20%;
+  }
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    .gridItem {
+      padding: 20px;
+    }
+  }
+  #itemA, #itemF {
+    grid-column: 1 / 3;
+  }
+  .statText {
+   font-size: 28px;
+  }
+}
+@include mobOnlyMQ{
+  .container {
+    margin: 0;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+    .gridItem {
+      padding: 10px;
+    }
+  }
+  .statText {
+   font-size: 24px;
+  }
+}
+.grid {
+  display: grid;
+  justify-content: space-evenly;
+  .gridItem{
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    h3, p {
+      margin: 0;
+    }
+  }
+}
+#itemA, #itemF {
+  background-image: $gradientPurple;
+}
+#itemB, #itemG {
+  background-image: $gradientRed;
+}
+#itemC, #itemH {
+  background-image: $gradientSkyBlue;
+}
+#itemD, #itemI {
+  background-image: $gradientYellow;
+}
+#itemE, #itemJ {
+  background-image: $gradientGreen ;
+}
+.statLabel {
+ @include fontFamComfortaa;
+ color: black;
+ font-size: 18px;
+}
+.statText {
+ @include fontFamLato;
+ color: black;
+}

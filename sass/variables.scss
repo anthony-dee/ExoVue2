@@ -1,0 +1,24 @@
+//loader
+$lgDiameter: 250px;
+$mdDiameter: 150px;
+$smDiameter: 50px;
+$ringWidth: 20px;
+
+$lgMobDiam: $lgDiameter * 0.8;
+$mdMobDiam: $mdDiameter * 0.8;
+$smMobDiam: $smDiameter * 0.8;
+$mobRingWidth: $ringWidth * 0.8;
+//everything else
+$red: rgb(255,0,0);
+$blue: rgb(0,0,255);
+$loaderRed: #EA5455;
+$loaderBlue: #0396FF;
+$loaderYellow: #F8D800;
+$gradientOrangeRed:  linear-gradient( 135deg, #FDD819 10%, #E80505 100%);
+$gradientYellow:  linear-gradient( 135deg, #FDEB71 10%, #F8D800 100%);
+$gradientSkyBlue:  linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);
+$gradientRed:  linear-gradient( 135deg, #FEB692 10%, #EA5455 100%);
+$gradientGreen: linear-gradient( 135deg, #81FBB8 10%, #28C76F 100%);
+$gradientYellBlue: linear-gradient( 135deg, #FFDB01 10%, #0E197D 100%);
+$gradietDusk: linear-gradient( 135deg, #F05F57 10%, #360940 100%);
+$gradientPurple: linear-gradient( 135deg, #E2B0FF 10%, #9F44D3 100%);

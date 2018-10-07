@@ -1,0 +1,27 @@
+@import "variables";
+
+@mixin mobOnlyMQ {
+  @media screen and (max-width: 576px){
+    @content;
+  }
+}
+@mixin nonMobMQ {
+  @media screen and (min-width: 576px){
+    @content;
+  }
+}
+@mixin fontFamHelVet {
+    font-family: Arial, Helvetica, sans-serif;
+}
+@mixin fontFamComfortaa {
+  font-family: 'Comfortaa', cursive;
+}
+@mixin fontFamLato {
+  font-family: 'Lato', sans-serif;
+}
+@mixin circle($diameter, $color, $ringThickness, $animation) {
+  height: $diameter;
+  width: $diameter;
+  box-shadow: 0 0 0 $ringThickness $color;
+  animation-name: $animation;
+}
