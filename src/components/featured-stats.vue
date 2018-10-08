@@ -105,9 +105,7 @@ export default {
     axios.get(`https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&select=pl_status,pl_hostname,pl_name,pl_masse,pl_rade,st_dist,pl_orbper,pl_pnum&order=dec&format=json`)
     .then(response => {
       // JSON responses are automatically parsed.
-      // this.posts = response.data
-      console.log(response.data)
-      console.log('asdsads')
+      //console.log(response.data)
       this.fetching = false;
       var data = response.data;
     var maxWght, minWght, bigRad, smallRad, closePlan, furthPlan, longOrb, shortOrb, mostPlanets;
@@ -221,5 +219,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-
+  @import '../assets/css/exovue.css';
 </style>
