@@ -1,8 +1,11 @@
-// compressedFilenamePattern: ../css/exovue.min.css, expandedFilenamePattern: ../css/exovue.css
+// compressedFilenamePattern: ../sec/assets/css/exovue.min.css, expandedFilenamePattern: ../sec/assets/css/exovue.css
 
 @import "variables";
 @import "mixins";
 @import "loader";
+@import "nav";
+
+
 body {
   @include  fontFamHelVet;
   width: 100%;

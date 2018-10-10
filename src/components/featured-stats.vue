@@ -219,5 +219,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-  @import '../assets/css/exovue.css';
+
 </style>

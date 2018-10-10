@@ -2,6 +2,7 @@
   <div class="gridItem">
     <h3 class="statLabel">{{ text }}</h3>
     <p class="statText">{{planet}}</p>
+    <router-link :to="'../planets/' +  planet   ">{{ planet }}</router-link>
     <p class="statText">{{ value }} {{ units }}</p>
   </div>
 </template>

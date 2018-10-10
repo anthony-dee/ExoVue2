@@ -1,21 +1,20 @@
 <template>
   <div id="app">
+    <navmenu></navmenu>
     <router-view/>
   </div>
 </template>
 
 <script>
+import navMenu from '@/components/nav'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    navmenu: navMenu
+  }
 }
 </script>
 
 <style>
-#app {
-  /*font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;*/
-}
+  @import '../src/assets/css/exovue.css';
 </style>
