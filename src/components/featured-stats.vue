@@ -35,6 +35,7 @@ export default {
     namedstat: namedstat,
     loader: loader
   },
+  props: [planetData],
   data () {
     return {
       appName: 'ExoVue',
