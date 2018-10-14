@@ -8,15 +8,15 @@
       <transition name="fade">
         <div v-show="sorted" class="grid">
           <countpara id="itemA" :value="confirmedPlanets.value" :text="confirmedPlanets.text"></countpara>
-          <namedstat id="itemB" :units="mostMass.units" :value="mostMass.value" :text="mostMass.text" :planet="mostMass.planet"></namedstat>
-          <namedstat id="itemC" :units="leastMass.units" :value="leastMass.value" :text="leastMass.text" :planet="leastMass.planet"></namedstat>
-          <namedstat id="itemD" :units="biggest.units" :value="biggest.value" :text="biggest.text" :planet="biggest.planet"></namedstat>
-          <namedstat id="itemE" :units="smallest.units" :value="smallest.value" :text="smallest.text" :planet="smallest.planet"></namedstat>
-          <namedstat id="itemF" :units="starWithMostPlanets.units" :value="starWithMostPlanets.value" :text="starWithMostPlanets.text" :planet="starWithMostPlanets.star"></namedstat>
-          <namedstat id="itemG" :units="furthest.units" :value="furthest.value" :text="furthest.text" :planet="furthest.planet"></namedstat>
-          <namedstat id="itemH" :units="closest.units" :value="closest.value" :text="closest.text" :planet="closest.planet"></namedstat>
-          <namedstat id="itemI" :units="longestOrbit.units" :value="longestOrbit.value" :text="longestOrbit.text" :planet="longestOrbit.planet"></namedstat>
-          <namedstat id="itemJ" :units="shortestOrbit.units" :value="shortestOrbit.value" :text="shortestOrbit.text" :planet="shortestOrbit.planet"></namedstat>
+          <namedstat id="itemB" :queryFor="mostMass.queryFor" :units="mostMass.units" :value="mostMass.value" :text="mostMass.text" :planet="mostMass.planet"></namedstat>
+          <namedstat id="itemC" :queryFor="leastMass.queryFor" :units="leastMass.units" :value="leastMass.value" :text="leastMass.text" :planet="leastMass.planet"></namedstat>
+          <namedstat id="itemD" :queryFor="biggest.queryFor" :units="biggest.units" :value="biggest.value" :text="biggest.text" :planet="biggest.planet"></namedstat>
+          <namedstat id="itemE" :queryFor="smallest.queryFor" :units="smallest.units" :value="smallest.value" :text="smallest.text" :planet="smallest.planet"></namedstat>
+          <namedstat id="itemF" :queryFor="starWithMostPlanets.queryFor" :units="starWithMostPlanets.units" :value="starWithMostPlanets.value" :text="starWithMostPlanets.text" :planet="starWithMostPlanets.star"></namedstat>
+          <namedstat id="itemG" :queryFor="furthest.queryFor" :units="furthest.units" :value="furthest.value" :text="furthest.text" :planet="furthest.planet"></namedstat>
+          <namedstat id="itemH" :queryFor="closest.queryFor" :units="closest.units" :value="closest.value" :text="closest.text" :planet="closest.planet"></namedstat>
+          <namedstat id="itemI" :queryFor="longestOrbit.queryFor" :units="longestOrbit.units" :value="longestOrbit.value" :text="longestOrbit.text" :planet="longestOrbit.planet"></namedstat>
+          <namedstat id="itemJ" :queryFor="shortestOrbit.queryFor" :units="shortestOrbit.units" :value="shortestOrbit.value" :text="shortestOrbit.text" :planet="shortestOrbit.planet"></namedstat>
         </div>
       </transition>
     </div>
@@ -49,55 +49,64 @@ export default {
         text: 'Star with most planets',
         units: 'planets',
         value: '',
-        star: ''
+        star: '',
+        queryFor: 'stars'
       },
       mostMass: {
         text: 'Highest mass',
         units: 'Earth masses',
         value: '',
-        planet: ''
+        planet: '',
+        queryFor: 'planets'
       },
       leastMass: {
         text: 'Lowest mass',
         units: 'Earth masses',
         value: '',
-        planet: ''
+        planet: '',
+        queryFor: 'planets'
       },
       biggest: {
         text: 'Biggest',
         units: 'Earth radii',
         value: '',
-        planet: ''
+        planet: '',
+        queryFor: 'planets'
       },
       smallest: {
         text: 'Smallest',
         units: 'Earth radii',
         value: '',
-        planet: ''
+        planet: '',
+        queryFor: 'planets'
       },
       closest: {
         text: 'Closest',
         units: 'parsecs',
         value: '',
-        planet: ''
+        planet: '',
+        queryFor: 'planets'
       },
       furthest: {
         text: 'Furthest',
         units: 'parsecs',
         value: '',
-        planet: ''
+        planet: '',
+        queryFor: 'planets'
       },
       longestOrbit: {
         text: 'Longest Orbit',
         units: 'days',
         value: '',
-        planet: ''
+        planet: '',
+        queryFor: 'planets'
       },
       shortestOrbit: {
         text: 'Shortest Orbit',
         units: 'days',
         value: '',
-        planet: ''
+        planet: '',
+        queryFor: 'planets'
       }
     }
   },

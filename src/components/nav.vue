@@ -13,6 +13,7 @@ export default {
         mainNavLinks: [
           ['Home', '/'],
           ['Planets', '/planets'],
+          ['Stars', '/stars'],
           ['Top Tens',  '/toptens']
         ]
     }
