@@ -3,7 +3,7 @@
       <h1>{{ appName }}</h1>
       <h2>{{subhead}}</h2>
       <transition name="fade">
-        <loader v-show="fetching"></loader>
+        <loader v-show="!sorted"></loader>
       </transition>
       <transition name="fade">
         <div v-show="sorted" class="grid">
@@ -23,10 +23,11 @@
 </template>
 
 <script>
-import axios from 'axios'
+//import axios from 'axios'
 import countpara from '@/components/count-para'
 import namedstat from '@/components/named-stat'
 import loader from '@/components/loader'
+import {bus} from '@/main.js'
 
 export default {
   name: 'featuredstats',
@@ -35,11 +36,11 @@ export default {
     namedstat: namedstat,
     loader: loader
   },
-  props: [planetData],
   data () {
     return {
       appName: 'ExoVue',
       subhead: 'Exoplanet Data brought to you by VueJS and the NASA Exoplanet Archive',
+      planetData: '',
       fetching: true,
       sorted: false,
       confirmedPlanets: {
@@ -112,93 +113,85 @@ export default {
     }
   },
   created() {
-    axios.get(`https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&select=pl_status,pl_hostname,pl_name,pl_masse,pl_rade,st_dist,pl_orbper,pl_pnum&order=dec&format=json`)
-    .then(response => {
-      // JSON responses are automatically parsed.
-      //console.log(response.data)
-      this.fetching = false;
-      var data = response.data;
-    var maxWght, minWght, bigRad, smallRad, closePlan, furthPlan, longOrb, shortOrb, mostPlanets;
-    var dataLength = data.length;
-    var weights = [];
-    var radii = [];
-    var dists = [];
-    var orbits = [];
-    var numberPlanets = [];
-    for (var i = 0; i < dataLength; i++) {
-    //console.log(data.body[i]['pl_masse'])
-      var thisItem = data[i]
-      if(thisItem['pl_masse'] != null) {
-        weights.push(thisItem['pl_masse'])
+    bus.$on('dataSender', (data) => {
+      this.planetData = data;
+      var maxWght, minWght, bigRad, smallRad, closePlan, furthPlan, longOrb, shortOrb, mostPlanets;
+      var dataLength = this.planetData.length;
+      var weights = [];
+      var radii = [];
+      var dists = [];
+      var orbits = [];
+      var numberPlanets = [];
+      for (var i = 0; i < dataLength; i++) {
+      //console.log(data.body[i]['pl_masse'])
+        var thisItem = data[i]
+        if(thisItem['pl_masse'] != null) {
+          weights.push(thisItem['pl_masse'])
+        }
+        if(thisItem['pl_rade'] != null) {
+          radii.push(thisItem['pl_rade'])
+        }
+        if(thisItem['st_dist'] != null){
+          dists.push(thisItem['st_dist'])
+        }
+        if(thisItem['pl_orbper'] != null){
+          orbits.push(thisItem['pl_orbper'])
+        }
+        if(thisItem['pl_pnum'] != null){
+          numberPlanets.push(thisItem['pl_pnum'])
+        }
       }
-      if(thisItem['pl_rade'] != null) {
-        radii.push(thisItem['pl_rade'])
-      }
-      if(thisItem['st_dist'] != null){
-        dists.push(thisItem['st_dist'])
-      }
-      if(thisItem['pl_orbper'] != null){
-        orbits.push(thisItem['pl_orbper'])
-      }
-      if(thisItem['pl_pnum'] != null){
-        numberPlanets.push(thisItem['pl_pnum'])
-      }
-    }
-    maxWght = Math.max.apply(Math, weights);
-    minWght = Math.min.apply(Math, weights);
-    bigRad = Math.max.apply(Math, radii);
-    smallRad = Math.min.apply(Math, radii);
-    furthPlan = Math.max.apply(Math, dists);
-    closePlan = Math.min.apply(Math, dists);
-    longOrb = Math.max.apply(Math, orbits);
-    shortOrb = Math.min.apply(Math, orbits);
-    mostPlanets = Math.max.apply(Math, numberPlanets);
-    for (var j = 0; j < dataLength; j++) {
-      var thisItem = data[j];
-      if (thisItem['pl_masse'] ==  maxWght) {
-        this.mostMass.planet = thisItem['pl_name'];
-        this.mostMass.value = maxWght.toLocaleString('en');
-      }
-      if (thisItem['pl_masse'] ==  minWght) {
-        this.leastMass.planet = thisItem['pl_name'];
-        this.leastMass.value = minWght;
-      }
-      if (thisItem['pl_rade'] == bigRad) {
-        this.biggest.planet = thisItem['pl_name'];
-        this.biggest.value =  bigRad;
+      maxWght = Math.max.apply(Math, weights);
+      minWght = Math.min.apply(Math, weights);
+      bigRad = Math.max.apply(Math, radii);
+      smallRad = Math.min.apply(Math, radii);
+      furthPlan = Math.max.apply(Math, dists);
+      closePlan = Math.min.apply(Math, dists);
+      longOrb = Math.max.apply(Math, orbits);
+      shortOrb = Math.min.apply(Math, orbits);
+      mostPlanets = Math.max.apply(Math, numberPlanets);
+      for (var j = 0; j < dataLength; j++) {
+        var thisItem = data[j];
+        if (thisItem['pl_masse'] ==  maxWght) {
+          this.mostMass.planet = thisItem['pl_name'];
+          this.mostMass.value = maxWght.toLocaleString('en');
+        }
+        if (thisItem['pl_masse'] ==  minWght) {
+          this.leastMass.planet = thisItem['pl_name'];
+          this.leastMass.value = minWght;
+        }
+        if (thisItem['pl_rade'] == bigRad) {
+          this.biggest.planet = thisItem['pl_name'];
+          this.biggest.value =  bigRad;
 
+        }
+        if (thisItem['pl_rade'] == smallRad) {
+          this.smallest.planet = thisItem['pl_name'];
+          this.smallest.value = smallRad;
+        }
+        if (thisItem['st_dist'] == closePlan) {
+          this.closest.planet = thisItem['pl_name'];
+          this.closest.value = closePlan;
+        }
+        if (thisItem['st_dist'] == furthPlan) {
+          this.furthest.planet = thisItem['pl_name'];
+          this.furthest.value = furthPlan.toLocaleString('en');
+        }
+        if (thisItem['pl_orbper'] == longOrb) {
+          this.longestOrbit.planet = thisItem['pl_name'];
+          this.longestOrbit.value = longOrb.toLocaleString('en');
+        }
+        if (thisItem['pl_orbper'] == shortOrb) {
+          this.shortestOrbit.planet = thisItem['pl_name'];
+          this.shortestOrbit.value = shortOrb.toFixed(3);
+        }
+        if (thisItem['pl_pnum'] == mostPlanets) {
+          this.starWithMostPlanets.star = thisItem['pl_hostname'];
+          this.starWithMostPlanets.value = mostPlanets;
+        }
       }
-      if (thisItem['pl_rade'] == smallRad) {
-        this.smallest.planet = thisItem['pl_name'];
-        this.smallest.value = smallRad;
-      }
-      if (thisItem['st_dist'] == closePlan) {
-        this.closest.planet = thisItem['pl_name'];
-        this.closest.value = closePlan;
-      }
-      if (thisItem['st_dist'] == furthPlan) {
-        this.furthest.planet = thisItem['pl_name'];
-        this.furthest.value = furthPlan.toLocaleString('en');
-      }
-      if (thisItem['pl_orbper'] == longOrb) {
-        this.longestOrbit.planet = thisItem['pl_name'];
-        this.longestOrbit.value = longOrb.toLocaleString('en');
-      }
-      if (thisItem['pl_orbper'] == shortOrb) {
-        this.shortestOrbit.planet = thisItem['pl_name'];
-        this.shortestOrbit.value = shortOrb.toFixed(3);
-      }
-      if (thisItem['pl_pnum'] == mostPlanets) {
-        this.starWithMostPlanets.star = thisItem['pl_hostname'];
-        this.starWithMostPlanets.value = mostPlanets;
-      }
-    }
-    this.confirmedPlanets.value = dataLength.toLocaleString('en');
-    this.sorted = true;
-    })
-    .catch(e => {
-      // this.errors.push(e)
-      console.log(e)
+      this.confirmedPlanets.value = dataLength.toLocaleString('en');
+      this.sorted = true;
     })
   },
   mounted(){

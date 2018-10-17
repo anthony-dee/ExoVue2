@@ -1,4 +1,4 @@
-// compressedFilenamePattern: ../sec/assets/css/exovue.min.css, expandedFilenamePattern: ../sec/assets/css/exovue.css
+// compressedFilenamePattern: ../src/assets/css/exovue.min.css, expandedFilenamePattern: ../src/assets/css/exovue.css
 
 @import "variables";
 @import "mixins";
@@ -85,4 +85,8 @@ body {
 .statText {
  @include fontFamLato;
  color: black;
+ text-decoration: none;
+ &:hover {
+   text-decoration: underline;
+ }
 }

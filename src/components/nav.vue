@@ -1,13 +1,13 @@
 <template>
   <div class="navbar">
-    <router-link v-for="nav in mainNavLinks" class="" v-bind:to="nav[1]">{{ nav[0] }}</router-link>
+    <router-link v-for="nav in mainNavLinks" class="" :to="nav[1]">{{ nav[0] }}</router-link>
   </div>
 </template>
 
 <script>
 export default {
   name: 'navmenu',
-  props: [],
+  props: ['planetData'],
   data () {
     return {
         mainNavLinks: [
