@@ -14,12 +14,18 @@ export default {
   components: {
     navmenu: navMenu
   },
+  data () {
+    return {
+      planetData: ''
+    }
+  },
   created() {
+    console.log(this.planetData)
     axios.get(`https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&select=pl_status,pl_hostname,pl_name,pl_masse,pl_rade,st_dist,pl_orbper,pl_pnum&order=dec&format=json`)
     .then(response => {
       // JSON responses are automatically parsed.
       //console.log(response.data)
-      this.fetching = false;
+      this.planetData = response.data;
       var data = response.data;
       bus.$emit('dataSender', data);
     })

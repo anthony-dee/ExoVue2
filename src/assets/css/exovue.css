@@ -241,3 +241,11 @@ body {
   font-family: 'Lato', sans-serif;
   color: black;
 }
+
+a.statText {
+  text-decoration: none;
+}
+
+a.statText:hover {
+  text-decoration: underline;
+}
