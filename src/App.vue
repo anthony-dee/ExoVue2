@@ -16,18 +16,21 @@ export default {
   },
   data () {
     return {
-      planetData: ''
+      //planetData: ''
     }
   },
   created() {
-    console.log(this.planetData)
+
     axios.get(`https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=exoplanets&select=pl_status,pl_hostname,pl_name,pl_masse,pl_rade,st_dist,pl_orbper,pl_pnum&order=dec&format=json`)
     .then(response => {
       // JSON responses are automatically parsed.
       //console.log(response.data)
-      this.planetData = response.data;
+
       var data = response.data;
-      bus.$emit('dataSender', data);
+      //bus.$emit('dataSender', 'data');
+      const parsedData = JSON.stringify(response.data);
+      localStorage.setItem('planetData', parsedData)
+      bus.$emit('dataSender', 'storageSet');
     })
     .catch(e => {
       // this.errors.push(e)

@@ -8,6 +8,7 @@
 
 export default {
   name: 'topten',
+  props: ['topTenData'],
   components: {
 
   },
@@ -17,10 +18,12 @@ export default {
       planetData: '',
       headline: 'Top Tens',
       smText: 'Everyone loves a ranked list',
-      topTenOptions: [ 'Most Massive', 'Least Mass', 'Biggest', 'Smallest',
-                  'Furthest Away', 'Closest','Longest Orbits', 'Shortest Orbits'
-      ]
+      topTen: ''
     }
+  },
+  updated(){
+    this.topTen = topTenData
+    console.log(this.topTen);
   }
 }
 </script>

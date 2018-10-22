@@ -1,5 +1,7 @@
 <template>
-  <pageHeader :headline="headline" :smText="smText"></pageHeader>
+  <div class="container">
+    <pageHeader :headline="headline" :smText="smText"></pageHeader>
+  </div>
 </template>
 
 <script>
@@ -9,7 +11,7 @@ export default {
   components: {
     pageHeader: pageHeader
   },
-  props: [],
+  props: ['topTenData'],
   data () {
     return {
       headline: 'Stars',

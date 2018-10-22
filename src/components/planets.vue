@@ -1,5 +1,7 @@
 <template>
-  <pageHeader :headline="headline" :smText="smText"></pageHeader>
+  <div class="container">
+    <pageHeader :headline="headline" :smText="smText"></pageHeader>
+  </div>
 </template>
 
 <script>

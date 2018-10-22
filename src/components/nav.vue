@@ -26,15 +26,18 @@ export default {
   },
   methods: {
     moveData: function(){
-      console.log('skljfsadkjf');
-      bus.$emit('navToTopTens', this.dataObj);
+      console.log(JSON.parse(localStorage.getItem('planetData')));
     }
   },
   created() {
 
     bus.$on('dataSender', (data) => {
-      this.dataObj = data;
-      console.log(this.dataObj);
+      console.log(data)
+      if (data === 'storageSet') {
+          this.dataObj = JSON.parse(localStorage.getItem('planetData'));
+      }
+
+      //console.log(this.dataObj);
     })
   }
 }
