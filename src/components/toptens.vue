@@ -2,11 +2,11 @@
   <div class="container">
     <pageHeader :headline="headline" :smText="smText"></pageHeader>
     <p>Select an option form the dropdown below and then press Generate Top Ten to ... well ... generate a top ten!</p>
-    <select id="topTenSelect" class="" name="topTenSelect" @change="logChoice()">
-      <option v-for="(option, index) in topTenOptions" :value="index" :data-sort="option.sort" :data-param="option.param">{{ option.text }}</option>
+    <select id="topTenSelect" class="" name="topTenSelect">
+      <option v-for="(option, index) in topTenOptions" :value="index" :data-sort="option.sort" :data-param="option.param" :data-units="option.units" :data-col-header="option.colheader">{{ option.text }}</option>
     </select>
     <button id="genTopTen" type="button" name="topTenGenerator" @click="sortTopTenData()">Generate Top Ten</button>
-    <topten :topTenData="sortedTopTen"></topten>
+    <topten :title="topTenTitle" :colheader="topTenColHeader" :topTenData="sortedTopTen"></topten>
   </div>
 </template>
 
@@ -28,16 +28,18 @@ export default {
       headline: 'Top Tens',
       smText: 'Everyone loves a ranked list',
       topTenOptions: [
-        {text: 'Most Massive', param: 'pl_masse', sort: 'desc'},
-        {text: 'Least Massive', param: 'pl_masse', sort: 'asc'},
-        {text: 'Biggest Exoplanets', param: 'pl_rade', sort: 'desc'},
-        {text: 'Smallest Massive', param: 'pl_rade', sort: 'asc'},
-        {text: 'Furthest Away', param: 'st_dist', sort: 'desc'},
-        {text: 'Closest', param: 'st_dist', sort: 'asc'},
-        {text: 'Longest Orbits', param: 'pl_orbper', sort: 'desc'},
-        {text: 'Shortest Orbit', param: 'pl_orbper', sort: 'asc'},
+        {text: 'Most Massive', param: 'pl_masse', sort: 'desc', units: 'Earth masses', colheader: 'Planet Mass'},
+        {text: 'Least Massive', param: 'pl_masse', sort: 'asc', units: 'Earth masses', colheader: 'Planet Mass'},
+        {text: 'Biggest Exoplanets', param: 'pl_rade', sort: 'desc', units: 'Earth radii', colheader: 'Planet Radius'},
+        {text: 'Smallest Exoplanets', param: 'pl_rade', sort: 'asc', units: 'Earth radii',  colheader: 'Planet Radius'},
+        {text: 'Furthest Away', param: 'st_dist', sort: 'desc', units: 'parsecs', colheader: 'Distance to Planetary System'},
+        {text: 'Closest', param: 'st_dist', sort: 'asc', units: 'parsecs', colheader: 'Distance to Planetary System'},
+        {text: 'Longest Orbits', param: 'pl_orbper', sort: 'desc', units: 'days', colheader: 'Orbital Period'},
+        {text: 'Shortest Orbit', param: 'pl_orbper', sort: 'asc', units: 'days', colheader: 'Orbital Period'}
       ],
-      sortedTopTen: ''
+      sortedTopTen: '',
+      topTenTitle: '',
+      topTenColHeader: ''
     }
   },
   methods: {
@@ -49,8 +51,12 @@ export default {
     },
     sortTopTenData: function(){
       const select = document.getElementById('topTenSelect');
-      const param = select.options[select.selectedIndex].getAttribute('data-param')
-      const sort = select.options[select.selectedIndex].getAttribute('data-sort')
+      const param = select.options[select.selectedIndex].getAttribute('data-param');
+      const sort = select.options[select.selectedIndex].getAttribute('data-sort');
+      const units = select.options[select.selectedIndex].getAttribute('data-units');
+      const col2header = select.options[select.selectedIndex].getAttribute('data-col-header');
+      this.topTenTitle = select.options[select.selectedIndex].innerText
+      this.topTenColHeader = col2header + ' (' + units + ')' ;
       let preTopTenArr = [];
       for (var i = 0; i < this.planetData.length; i++) {
         let thisItem = this.planetData[i];
@@ -68,15 +74,15 @@ export default {
             return a > b ? -1 : (a < b ? 1 : 0);
           }
       })
-      console.log(preTopTenArr);
+      //console.log(preTopTenArr);
       preTopTenArr.splice(10);
       this.sortedTopTen = preTopTenArr;
-      console.log(this.sortedTopTen);
+      //console.log(this.sortedTopTen);
     }
 
   },
   created(){
-    console.log(JSON.parse(localStorage.getItem('planetData')));
+    //console.log(JSON.parse(localStorage.getItem('planetData')));
     this.planetData = JSON.parse(localStorage.getItem('planetData'));
   }
 }

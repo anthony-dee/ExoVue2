@@ -4,7 +4,7 @@
     <router-link class="" :to="'/'">Home</router-link>
     <router-link class="" :to="'/planets'">Planets</router-link>
     <router-link class="" :to="'/stars'">Stars</router-link>
-    <router-link class="" :to="'/toptens'" v-on:click.native="moveData()">Top Tens</router-link>
+    <router-link class="" :to="'/toptens'">Top Tens</router-link>
   </div>
 </template>
 
@@ -22,11 +22,6 @@ export default {
           ['Stars', '/stars'],
           ['Top Tens',  '/toptens']
         ]
-    }
-  },
-  methods: {
-    moveData: function(){
-      console.log(JSON.parse(localStorage.getItem('planetData')));
     }
   },
   created() {

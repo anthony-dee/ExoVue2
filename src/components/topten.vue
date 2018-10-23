@@ -1,6 +1,18 @@
 <template>
   <div class="">
-
+    <h2>{{ title }}</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Position</th><th>Planet Name</th><th>{{ colheader }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr  v-for="(item, index) in topTenData">
+          <td>{{ index + 1 }}</td><td><router-link :to="'../planets/' +  item[0]">{{ item[0] }}</router-link></td><td>{{ item[1] }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
@@ -8,7 +20,7 @@
 
 export default {
   name: 'topten',
-  props: ['topTenData'],
+  props: ['title', 'colheader','topTenData'],
   components: {
 
   },
@@ -18,12 +30,11 @@ export default {
       planetData: '',
       headline: 'Top Tens',
       smText: 'Everyone loves a ranked list',
-      topTen: ''
+      topTen: this.topTenData
     }
   },
   updated(){
-    this.topTen = topTenData
-    console.log(this.topTen);
+    //console.log(this.topTen);
   }
 }
 </script>

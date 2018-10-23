@@ -113,11 +113,11 @@ export default {
     }
   },
   created() {
-    console.log(this.planetData);
+    //console.log(this.planetData);
     bus.$on('dataSender', (data) => {
-      console.log(data);
+      //console.log(data);
       this.planetData = JSON.parse(localStorage.getItem('planetData'));
-      console.log(this.planetData);
+      //  console.log(this.planetData);
       //this.planetData = data;
       var maxWght, minWght, bigRad, smallRad, closePlan, furthPlan, longOrb, shortOrb, mostPlanets;
       var dataLength = this.planetData.length;
@@ -129,7 +129,6 @@ export default {
       for (var i = 0; i < dataLength; i++) {
       //console.log(data.body[i]['pl_masse'])
         var thisItem = this.planetData[i]
-        console.log(thisItem)
         if(thisItem['pl_masse'] != null) {
           weights.push(thisItem['pl_masse'])
         }
