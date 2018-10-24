@@ -6,7 +6,7 @@
       <option v-for="(option, index) in topTenOptions" :value="index" :data-sort="option.sort" :data-param="option.param" :data-units="option.units" :data-col-header="option.colheader">{{ option.text }}</option>
     </select>
     <button id="genTopTen" type="button" name="topTenGenerator" @click="sortTopTenData()">Generate Top Ten</button>
-    <topten :title="topTenTitle" :colheader="topTenColHeader" :topTenData="sortedTopTen"></topten>
+    <topten :title="topTenTitle" :colheader="topTenColHeader" :units="topTenUnits" :topTenData="sortedTopTen"></topten>
   </div>
 </template>
 
@@ -39,7 +39,8 @@ export default {
       ],
       sortedTopTen: '',
       topTenTitle: '',
-      topTenColHeader: ''
+      topTenColHeader: '',
+      topTenUnits: ''
     }
   },
   methods: {
@@ -54,9 +55,10 @@ export default {
       const param = select.options[select.selectedIndex].getAttribute('data-param');
       const sort = select.options[select.selectedIndex].getAttribute('data-sort');
       const units = select.options[select.selectedIndex].getAttribute('data-units');
-      const col2header = select.options[select.selectedIndex].getAttribute('data-col-header');
+      const col3header = select.options[select.selectedIndex].getAttribute('data-col-header');
       this.topTenTitle = select.options[select.selectedIndex].innerText
-      this.topTenColHeader = col2header + ' (' + units + ')' ;
+      this.topTenColHeader = col3header;
+      this.topTenUnits = units;
       let preTopTenArr = [];
       for (var i = 0; i < this.planetData.length; i++) {
         let thisItem = this.planetData[i];

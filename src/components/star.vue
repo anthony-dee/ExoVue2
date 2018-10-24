@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="container">
     <pageHeader :headline="id" :smText="smText"></pageHeader>
     <div class="starData">
       <h2>Star Data</h2>

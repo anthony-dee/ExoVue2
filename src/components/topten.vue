@@ -1,10 +1,10 @@
 <template>
   <div class="">
     <h2>{{ title }}</h2>
-    <table>
+    <table id="topTenTable">
       <thead>
         <tr>
-          <th>Position</th><th>Planet Name</th><th>{{ colheader }}</th>
+          <th>Position</th><th>Planet Name</th><th>{{ colheader }}<br>({{ units }})</th>
         </tr>
       </thead>
       <tbody>
@@ -20,7 +20,7 @@
 
 export default {
   name: 'topten',
-  props: ['title', 'colheader','topTenData'],
+  props: ['title', 'colheader', 'units', 'topTenData'],
   components: {
 
   },

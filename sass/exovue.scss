@@ -92,3 +92,19 @@ a.statText {
     text-decoration: underline;
   }
 }
+#topTenTable {
+  thead{
+    tr{
+      th:nth-child(2) {
+        text-align: left;
+      }
+    }
+  }
+  tbody {
+    tr {
+      td:nth-child(1), td:nth-child(3) {
+        text-align: center;
+      }
+    }
+  }
+}

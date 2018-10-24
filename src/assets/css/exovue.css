@@ -249,3 +249,11 @@ a.statText {
 a.statText:hover {
   text-decoration: underline;
 }
+
+#topTenTable thead tr th:nth-child(2) {
+  text-align: left;
+}
+
+#topTenTable tbody tr td:nth-child(1), #topTenTable tbody tr td:nth-child(3) {
+  text-align: center;
+}
